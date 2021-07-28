@@ -1,0 +1,14 @@
+{% extends 'template.html' %}
+
+{% block content %}
+    <h1> Создать аккаунт</h1>
+    <div class="reg-form">
+        <form method="post">
+            {% csrf_token %}
+            {{ user.user_name }} <br>
+            {{ user.user_password }} <br>
+            <button type="submit"><i> Создать аккаунт</i>></button>
+        </form>
+    </div>
+
+{% endblock %}
