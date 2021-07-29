@@ -5,8 +5,10 @@
     <div class="reg-form">
         <form method="post">
             {% csrf_token %}
-            {{ user.user_name }} <br>
-            {{ user.user_password }} <br>
+            Имя пользователя <br>
+            {{ user.username }} <br>
+            Пароль <br>
+            {{ user.password }} <br>
             <button type="submit"><i> Создать аккаунт</i>></button>
         </form>
     </div>
