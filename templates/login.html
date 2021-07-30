@@ -5,8 +5,7 @@
     <div class="reg-form">
         <form method="post">
             {% csrf_token %}
-            {{ user.userrname}} <br>
-            {{ user.password }} <br>
+            {{ form }} <br>
             <button type="submit"><i> Войти в аккаунт</i>></button>
         </form>
     <span>{{ error }}</span>

@@ -2,6 +2,11 @@
 <html>
 
 <title> Pomodoro </title>
+{% if request.user.is_authenticated %}
+{% else %}
+<button type="submit"><a href= {% url 'login' %}> Login </a> </button>
+<button type="submit"><a href= {% url 'new user' %}> Register </a> </button>
+{% endif %}
 <head>
     <meta charset="UTF-8">
     Hello {{ request.user }}

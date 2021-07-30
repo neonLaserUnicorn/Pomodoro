@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import Chores
 from .forms import UserForm, RegisterForm
-from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -13,10 +15,13 @@ def cur_user(request):
 
 def new_user(request):
     if request.method == 'POST':
-        user = UserForm(request.POST)
+        user = RegisterForm(request.POST)
         if user.is_valid():
             user.save()
-    form = UserForm
+            auth_user = authenticate(username=user.username, password=user.password)
+            login(request, user)
+            return redirect('current user')
+    form = RegisterForm
     data = {
         'user': form
     }
@@ -24,5 +29,10 @@ def new_user(request):
     return render(request, 'add_user.html', data)
 
 
-def login(request):
-    return render(request, 'login.html')
+class LogInView(LoginView):
+    template_name = 'login.html'
+    form_class = UserForm
+    success_url = reverse_lazy('current user')
+
+    def get_success_url(self):
+        return self.success_url
