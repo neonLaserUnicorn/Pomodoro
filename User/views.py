@@ -10,7 +10,7 @@ from django.urls import reverse_lazy
 
 def cur_user(request):
     all_chores = Chores.objects.filter(author=request.user.username)
-    return render(request, 'template.html', locals())
+    return render(request, 'user.html', locals())
 
 
 def new_user(request):
@@ -40,4 +40,10 @@ class LogInView(LoginView):
 def new_task(request):
     task = Chores(author=request.user.username)
     task.save()
+    return redirect('current user')
+
+def clear_tasks(request):
+    all_chores = Chores.objects.filter(author=request.user.username)
+    for item in all_chores:
+        Chores.delete(item)
     return redirect('current user')

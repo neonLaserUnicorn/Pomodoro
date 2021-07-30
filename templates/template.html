@@ -4,6 +4,7 @@
 <title> Pomodoro </title>
 {% if request.user.is_authenticated %}
     <button type="submit"><a href="{% url 'new task' %}"> Add New Cycle</a></button>
+    <button type="submit"><a href="{% url 'clear' %}"> Clear all</a></button>
 {% else %}
 <button type="submit"><a href= {% url 'login' %}> Login </a> </button>
 <button type="submit"><a href= {% url 'new user' %}> Register </a> </button>
