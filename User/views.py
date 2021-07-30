@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 
 
 def cur_user(request):
-    all_chores = Chores.objects.all
+    all_chores = Chores.objects.filter(author=request.user.username)
     return render(request, 'template.html', locals())
 
 
@@ -36,3 +36,8 @@ class LogInView(LoginView):
 
     def get_success_url(self):
         return self.success_url
+
+def new_task(request):
+    task = Chores(author=request.user.username)
+    task.save()
+    return redirect('current user')
