@@ -47,3 +47,9 @@ def clear_tasks(request):
     for item in all_chores:
         Chores.delete(item)
     return redirect('current user')
+
+def ret_tasks(request):
+    all_chores = Chores.objects.filter(author=request.user.username)
+
+
+    return render(request, 'tasks.html', locals())
