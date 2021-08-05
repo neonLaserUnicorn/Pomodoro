@@ -50,6 +50,6 @@ def clear_tasks(request):
 
 def ret_tasks(request):
     all_chores = Chores.objects.filter(author=request.user.username)
-
+    data = [{'id':item.id, 'name':item.name, 'author':item.author, 'complete':item.complete, 'create_time':item.create_time} for item in all_chores]
 
     return render(request, 'tasks.html', locals())
